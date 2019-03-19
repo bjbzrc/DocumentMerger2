@@ -5,18 +5,7 @@ namespace Document_Merger
 {
     class Program
     {
-        static string DocumentStart()
-        {
-            Console.Write("Enter name of document: ");
-
-            string doc;
-            while ((doc = Console.ReadLine()).Length == 0 || !File.Exists(doc))
-            {
-                Console.Write("Document not found, please enter a valid document name: ");
-            }
-
-            return doc;
-        }
+        // Make a new method here that checks doc names from args
 
         static int WriteDocument(StreamWriter writer, string file)
         {
@@ -48,27 +37,24 @@ namespace Document_Merger
             return count;
         }
 
-        static void Main(string[] args)
+        static void Main(string[] args) // Change args length with args.Length? 
         {
-            Console.WriteLine("Document Merger\n");
-
             do
             {
-                string d1 = DocumentStart();
-                string d2 = DocumentStart();
-                string fileName = d1.Substring(0, d1.Length - 4) + d2;
+                // Need to replace instances of 'fileName' and other vars to 
+                // command line args instead. Replace all further commented vars:
                 StreamWriter writer = null;
 
                 try
                 {
-                    writer = new StreamWriter(fileName);
-                    int count = WriteDocument(writer, d1);
-                    count += WriteDocument(writer, d2);
-                    Console.WriteLine("{0} was successfully saved. The document contains {1} characters", fileName);
+                    writer = new StreamWriter(/* fileName */); // Probably need to assign args to vars
+                    int count = WriteDocument(writer,/* d1 */);
+                    count += WriteDocument(writer, /* d2 */);
+                    Console.WriteLine("{0} was successfully saved. The document contains {1} characters", /* fileName */);
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Error writing to {fileName}: {ex.Message}");
+                    Console.WriteLine($"Error writing to {/* fileName */}: {ex.Message}");
                 }
                 finally
                 {
